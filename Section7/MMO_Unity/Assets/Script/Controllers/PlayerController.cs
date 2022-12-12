@@ -13,10 +13,19 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        //Managers.Input.KeyAction -= OnKeyboard;
-        //Managers.Input.KeyAction += OnKeyboard;
         Managers.Input.MouseAction -= OnMouseClicked;
         Managers.Input.MouseAction += OnMouseClicked;
+
+        // Default Popup SHOW/CLOSE
+        //Managers.UI.ShowPopupUI<UI_Button>();
+        //Managers.UI.ClosePopupUI();
+
+        // Check Stack Popup SHOW/CLOSE
+        //UI_Button ui = Managers.UI.ShowPopupUI<UI_Button>();
+        //Managers.UI.ClosePopupUI(ui);
+
+        // Inventory
+        Managers.UI.ShowSceneUI<UI_Inven>();
     }
 
     public enum PlayerState
@@ -29,7 +38,7 @@ public class PlayerController : MonoBehaviour
 
     void UpdateDie()
     {
-        // ¾Æ¹«°Íµµ ¾ø´Ù.
+        // ï¿½Æ¹ï¿½ï¿½Íµï¿½ ï¿½ï¿½ï¿½ï¿½.
     }
     void UpdateMoving()
     {
@@ -45,16 +54,12 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 20 * Time.deltaTime);
         }
 
-        // Animation
         Animator anim = GetComponent<Animator>();
-        // ÇöÀç °ÔÀÓ »óÅÂ¿¡ ´ëÇÑ Á¤º¸¸¦ ³Ñ°ÜÁÜ.
         anim.SetFloat("speed", _speed);
     }
     void UpdateIdle()
     {
-        // Animation
         Animator anim = GetComponent<Animator>();
-        // ÇöÀç °ÔÀÓ »óÅÂ¿¡ ´ëÇÑ Á¤º¸¸¦ ³Ñ°ÜÁÜ.
         anim.SetFloat("speed", 0);
     }
     void Update()
@@ -71,41 +76,8 @@ public class PlayerController : MonoBehaviour
                 UpdateIdle();
                 break;
         }
-
-        // ÇÏµåÄÚµù.
-        // ½ºÆÄ°ÔÆ¼ ÄÚµå ¸¸µé±â µû¾Ç ÁÁ´Ù~
-        //if (_moveToDest)
-        //    wait_run_ratio = Mathf.Lerp(wait_run_ratio, 1, 10.0f * Time.deltaTime);
-        //else
-        //    wait_run_ratio = Mathf.Lerp(wait_run_ratio, 0, 10.0f * Time.deltaTime);
-        //Animator anim = GetComponent<Animator>();
-        //anim.SetFloat("wait_run_ratio", wait_run_ratio);
-        //anim.Play("WAIT_RUN");
     }
 
-    //void OnKeyboard()
-    //{
-    //    if (Input.GetKey(KeyCode.UpArrow))
-    //    {
-    //        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.forward), 0.2f);
-    //        transform.position += Vector3.forward * Time.deltaTime * _speed;
-    //    }
-    //    if (Input.GetKey(KeyCode.DownArrow))
-    //    {
-    //        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.back), 0.2f);
-    //        transform.position += Vector3.back * Time.deltaTime * _speed;
-    //    }
-    //    if (Input.GetKey(KeyCode.LeftArrow))
-    //    {
-    //        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.left), 0.2f);
-    //        transform.position += Vector3.left * Time.deltaTime * _speed;
-    //    }
-    //    if (Input.GetKey(KeyCode.RightArrow))
-    //    {
-    //        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.right), 0.2f);
-    //        transform.position += Vector3.right * Time.deltaTime * _speed;
-    //    }
-    //}
     void OnMouseClicked(Define.MouseEvent evt)
     {
         if (_state == PlayerState.Die)
