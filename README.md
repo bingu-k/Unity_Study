@@ -14,4 +14,4 @@
 - Section 10. Object Pooling
 - Section 11. Coroutine
 - Section 12. Data
-- Section 13. Mini RPG
+- MiniProject : Mini RPG
