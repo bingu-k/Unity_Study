@@ -8,8 +8,12 @@ using UnityEngine.UI;
 public abstract class UI_Base : MonoBehaviour
 {
     Dictionary<Type, UnityEngine.Object[]> _objects = new Dictionary<Type, UnityEngine.Object[]>();
-
     public abstract void Init();
+
+    private void Start()
+    {
+        Init();
+    }
 
     protected void Bind<T>(Type type) where T : UnityEngine.Object
     {
@@ -20,7 +24,6 @@ public abstract class UI_Base : MonoBehaviour
 
         for (int i = 0; i < names.Length; ++i)
         {
-            // 여기서 만약 GameObject가 들어오면 Crash가 발생하기 때문에 새로운 함수를 정의
             if (typeof(T) == typeof(GameObject))
                 objects[i] = Util.FindChild(gameObject, names[i], true);
             else

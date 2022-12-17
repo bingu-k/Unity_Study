@@ -27,11 +27,6 @@ public class UI_Button : UI_Popup
         ItemIcon
     }
 
-    private void Start()
-    {
-        Init();
-    }
-
     public override void Init()
     {
         base.Init();
@@ -44,8 +39,6 @@ public class UI_Button : UI_Popup
 
         GameObject go = GetImage((int)Images.ItemIcon).gameObject;
         BindEvent(go, (PointerEventData data) => { go.transform.position = data.position; }, Define.UIEvent.Drag);
-        //Extension을 사용하면 한번에 호출가능하지만, 가독성이...?
-        //GetImage((int)Images.ItemIcon).gameObject.BindEvent();
     }
 
     int _score = 0;

@@ -15,17 +15,11 @@ public class UI_Inven_Item : UI_Base
 
     string _name;
 
-    private void Start()
-    {
-        Init();
-    }
-
     public override void Init()
     {
         Bind<GameObject>(typeof(GameObjects));
         Get<GameObject>((int)GameObjects.ItemNameText).GetComponent<Text>().text = _name;
 
-        // Clicked Event Mapping
         Get<GameObject>((int)GameObjects.ItemIcon).BindEvent((PointEventData) => { Debug.Log($"Clicked {_name}"); });
     }
 
